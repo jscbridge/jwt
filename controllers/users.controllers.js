@@ -9,14 +9,14 @@ const User = {
   },
   // Carga pg CONFIRMACION al dar al link.
   confirmacion: async (req, res) => {
-    // try {
-    //   // Verifica el token donde está el email del usuario
-    //   let jwtVerify = jwt.verify(req.params.infoJwt, "Ll140ll140");
-    //   let email = jwtVerify.email;
+    try {
+      // Verifica el token donde está el email del usuario
+      let jwtVerify = jwt.verify(req.params.infoJwt, "Ll140ll140");
+      let email = jwtVerify.email;
       res.render("../views/confirmacion.ejs");
-    // } catch (error) {
-    //   res.render("../views/error.ejs");
-    // }
+    } catch (error) {
+      res.render("../views/error.ejs");
+    }
   },
   // Nos VERIFICA el TOKEN y recogemos el correo. [true] -> UPDATE.  [false] ->
   verificar: async (req, res) => {
@@ -39,8 +39,7 @@ const User = {
       const infoJwt = jwt.sign({ email }, "Ll140ll140", {
         expiresIn: "100s",
       });
-      // res.json(infoJwt);
-      res.json(`http://localhost:5000/confirmacion/${infoJwt}`);
+      res.json(infoJwt);
     } else {
       res.json(false);
     }

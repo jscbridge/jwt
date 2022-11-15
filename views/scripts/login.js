@@ -20,7 +20,7 @@ btn.addEventListener("click", () => {
       } else {
         document.getElementsByTagName("p")[0].innerText = "";
         document.getElementsByTagName("a")[0].style.display="block";
-        document.getElementsByTagName("a")[0].href = token;
+        document.getElementsByTagName("a")[0].href = `http://localhost:5000/confirmacion/${token}`;
       }
     });
 });
