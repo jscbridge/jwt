@@ -1,4 +1,5 @@
-function prueba() {
+let btn = document.getElementById("btn2");
+btn.addEventListener("click", () => {
   let newPass = document.getElementById("pass1").value;
   let repeatPass = document.getElementById("pass2").value;
   var ok = newPass == repeatPass;
@@ -33,4 +34,4 @@ function prueba() {
     document.getElementsByTagName("p")[0].innerText =
       "No son iguales o está vacio el campo";
   }
-}
+});
