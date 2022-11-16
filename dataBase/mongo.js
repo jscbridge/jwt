@@ -5,4 +5,3 @@ mongoose.connect(url, function (err) {
   if (err) throw err;
   console.log("BBDD ON");
 });
-

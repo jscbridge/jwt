@@ -1,43 +1,35 @@
-const mongoose = require("mongoose");
 const userModel = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 
 const User = {
-  // Carga LOGIN nada más arrancar.
-  start: async (req, res) => {
-    res.render("../views/login.ejs");
+  // Carga view LOGIN al arrancar.
+  start: (req, res) => {
+    res.render("../views/views/login.ejs");
   },
-  // Carga pg CONFIRMACION al dar al link.
-  confirmacion: async (req, res) => {
-    try {
-      // Verifica el token donde está el email del usuario
-      let jwtVerify = jwt.verify(req.params.infoJwt, "Ll140ll140");
-      let email = jwtVerify.email;
-      res.render("../views/confirmacion.ejs");
-    } catch (error) {
-      res.render("../views/error.ejs");
-    }
+  // Carga view PAGNAPASS al dar -link-.
+  paginaPassword: (req, res) => {
+    res.render("../views/views/paginaPass.ejs");
   },
-  // Nos VERIFICA el TOKEN y recogemos el correo. [true] -> UPDATE.  [false] ->
+  // VERIFICA el TOKEN y recogemos el email. [true] -> UPDATE.  [false] -> Incorrecto
   verificar: async (req, res) => {
-    const { password, token } = req.body;
+    let { token, password } = req.body;
     try {
       // Verifica el token donde está el email del usuario
       let jwtVerify = jwt.verify(token, "Ll140ll140");
       let email = jwtVerify.email;
-      let doc = await userModel.findOneAndUpdate({ email }, { password });
+      await userModel.findOneAndUpdate({ email }, { password });
       res.json(true);
     } catch (error) {
       res.json(false);
     }
   },
-  // Nos BUSCA el user: [true] - > CREA un token(correo) y lo devuelve. [false] -> No existe usuario
+  // BUSCA el user: [true] - > CREA un token(correo) y lo devuelve. [false] -> No existe usuario
   getUser: async (req, res) => {
     const { email } = req.body;
     const infoUser = await userModel.findOne({ email });
     if (infoUser) {
       const infoJwt = jwt.sign({ email }, "Ll140ll140", {
-        expiresIn: "100s",
+        expiresIn: "1000s",
       });
       res.json(infoJwt);
     } else {
