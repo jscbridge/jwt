@@ -1,7 +1,7 @@
 let btn = document.getElementById("btn");
 btn.addEventListener("click", () => {
   let email = document.getElementById("email").value;
-
+  
   let info = {
     method: "POST",
     body: JSON.stringify({ email }),
@@ -16,11 +16,14 @@ btn.addEventListener("click", () => {
     .then((res) => res.json())
     .then((token) => {
       if (!token) {
-        document.getElementsByTagName("p")[0].innerText = "Incorrecto";
+        document.getElementsByTagName("p")[0].innerText =
+          "El email no existe en la BD";
       } else {
         document.getElementsByTagName("p")[0].innerText = "";
-        document.getElementsByTagName("a")[0].style.display="block";
-        document.getElementsByTagName("a")[0].href = token;
+        document.getElementsByTagName("a")[0].style.display = "block";
+        document.getElementsByTagName(
+          "a"
+        )[0].href = `http://localhost:5000/paginapassword/${token}`;
       }
     });
 });

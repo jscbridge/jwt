@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 //! PLANTILLA - MODELO
 
 const usuarioConstructorSchema = {
-  userName: String,
   email: String,
   password: String,
 };
