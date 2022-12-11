@@ -24,6 +24,7 @@ btn.addEventListener("click", () => {
         document.getElementsByTagName(
           "a"
         )[0].href = `http://localhost:5000/paginapassword/${token}`;
+        document.cookie = `miCookie=http://localhost:5000/paginapassword/${token};expires=Mon  25 Jun 2023 11:12:13 UTC;  path=/`;
       }
     });
 });
